@@ -38,7 +38,11 @@ export default function MasteryQuiz({ initialQuiz }: { initialQuiz: Quiz }) {
 
   const score = useMemo(() => {
     let s = 0;
-    for (const q of questions) if (checked[q.id] && isCorrect(q)) s++;
+    for (const q of questions) {
+      if (checked[q.id] && answers[q.id] === correctIdFor(q)) {
+        s++;
+      }
+    }
     return s;
   }, [answers, checked, questions]);
 

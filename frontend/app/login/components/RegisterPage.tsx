@@ -1,5 +1,8 @@
+'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -9,7 +12,7 @@ import { Alert, AlertDescription } from './ui/alert';
 import { AlertCircle, User, GraduationCap } from 'lucide-react';
 
 export function RegisterPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { register } = useAuth();
   
   const [userType, setUserType] = useState<'student' | 'professor' | null>(null);
@@ -83,8 +86,7 @@ export function RegisterPage() {
     const result = await register(formData.name, formData.email, formData.password, userType || 'student');
 
     if (result.success) {
-      // Redirect to dashboard
-      navigate('/dashboard');
+      router.push('/');
     } else {
       // Show error
       setErrors({ general: result.error || 'Registration failed.' });
@@ -261,7 +263,7 @@ export function RegisterPage() {
 
                   <div className="text-center text-sm text-muted-foreground">
                     Already have an account?{' '}
-                    <Link to="/login" className="text-secondary hover:underline">
+                    <Link href="/login" className="text-secondary hover:underline">
                       Sign in
                     </Link>
                   </div>

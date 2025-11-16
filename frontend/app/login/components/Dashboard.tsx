@@ -1,16 +1,22 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { LogOut, UserCircle } from 'lucide-react';
 
 export function Dashboard() {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    router.push('/');
+  };
+
+  const handleGoToModules = () => {
+    router.push('/module/1');
   };
 
   return (
@@ -22,10 +28,15 @@ export function Dashboard() {
               <h1>Dashboard</h1>
               <p className="text-sm text-muted-foreground">Arizona State University - CSE 230</p>
             </div>
-            <Button variant="outline" onClick={handleLogout}>
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button onClick={handleGoToModules}>
+                Go to Module 1
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -36,7 +47,7 @@ export function Dashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <UserCircle className="h-6 w-6" />
-                Welcome, {user?.name}!
+                Welcome, {user?.name ?? user?.email ?? 'learner'}!
               </CardTitle>
               <CardDescription>
                 You have successfully registered and logged in.
@@ -46,19 +57,19 @@ export function Dashboard() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <span className="text-muted-foreground">Name:</span>
-                  <span>{user?.name}</span>
+                  <span>{user?.name ?? '—'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-muted-foreground">Email:</span>
-                  <span>{user?.email}</span>
+                  <span>{user?.email ?? '—'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-muted-foreground">Role:</span>
-                  <span className="capitalize">{user?.role}</span>
+                  <span className="capitalize">{user?.role ?? 'student'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-muted-foreground">User ID:</span>
-                  <span className="font-mono text-sm">{user?.id}</span>
+                  <span className="font-mono text-sm">{user?.id ?? '—'}</span>
                 </div>
               </div>
             </CardContent>

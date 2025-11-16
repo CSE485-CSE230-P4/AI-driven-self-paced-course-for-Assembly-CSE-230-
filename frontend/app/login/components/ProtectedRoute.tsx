@@ -1,4 +1,7 @@
-import { Navigate } from 'react-router-dom';
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../hooks/useAuth';
 
 interface ProtectedRouteProps {
@@ -6,10 +9,17 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
+  const router = useRouter();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/register" replace />;
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.replace('/login');
+    }
+  }, [isAuthenticated, loading, router]);
+
+  if (loading || !isAuthenticated) {
+    return null;
   }
 
   return <>{children}</>;

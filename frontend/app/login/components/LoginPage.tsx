@@ -1,5 +1,8 @@
+'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -9,7 +12,7 @@ import { Alert, AlertDescription } from './ui/alert';
 import { AlertCircle } from 'lucide-react';
 
 export function LoginPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { login } = useAuth();
   
   const [formData, setFormData] = useState({
@@ -35,7 +38,7 @@ export function LoginPage() {
     const result = await login(formData.email, formData.password);
 
     if (result.success) {
-      navigate('/dashboard');
+      router.push('/');
     } else {
       setError(result.error || 'Login failed.');
       setIsLoading(false);
@@ -94,8 +97,8 @@ export function LoginPage() {
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              Don't have an account?{' '}
-              <Link to="/register" className="text-secondary hover:underline">
+              Don&apos;t have an account?{' '}
+              <Link href="/register" className="text-secondary hover:underline">
                 Sign up
               </Link>
             </div>

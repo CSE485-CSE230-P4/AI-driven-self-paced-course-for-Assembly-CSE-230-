@@ -1,10 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { GraduationCap } from 'lucide-react';
 
 export function LandingPage() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted px-4 py-8">
@@ -26,14 +28,14 @@ export function LandingPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <Button 
-              onClick={() => navigate('/register')} 
+              onClick={() => router.push('/register')} 
               className="w-full"
               size="lg"
             >
               Sign Up
             </Button>
             <Button 
-              onClick={() => navigate('/login')} 
+              onClick={() => router.push('/login')} 
               className="w-full"
               variant="outline"
               size="lg"
