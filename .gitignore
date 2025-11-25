@@ -16,3 +16,5 @@ backend/.env
 db_data
 .env
 
+# virtual environment
+.venv
