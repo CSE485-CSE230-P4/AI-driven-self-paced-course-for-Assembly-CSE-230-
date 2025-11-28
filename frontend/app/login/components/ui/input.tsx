@@ -1,21 +1,31 @@
+// frontend/app/login/components/ui/input.tsx
+"use client";
+
 import * as React from "react";
 
-import { cn } from "./utils";
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-  return (
+/**
+ * Reusable input styled to match the ASU card look:
+ * - Warm beige background
+ * - Dark text
+ * - Slight shadow
+ */
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className = "", ...props }, ref) => (
     <input
-      type={type}
-      data-slot="input"
-      className={cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base bg-input-background transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        className,
-      )}
+      ref={ref}
+      className={
+        "block w-full rounded-md border px-3 py-2 text-sm " +
+        "border-[#d5bfa2] bg-[#f3e1c9] text-[#3b2f2a] " +
+        "placeholder:text-[#b79a7a] shadow-sm " +
+        "focus:outline-none focus:ring-2 focus:ring-[#8C1D40] focus:ring-offset-1 " +
+        className
+      }
       {...props}
     />
-  );
-}
+  )
+);
 
-export { Input };
+Input.displayName = "Input";
