@@ -4,10 +4,10 @@ import { RESOURCES } from "../mastery/resources";
 
 type Choice = { id: string; text: string; isCorrect: boolean };
 type Question = { id: string; prompt: string; choices: Choice[]; hint?: string };
-type Quiz = { moduleId: string; code: string; title: string; questions: Question[] };
+type Quiz = { moduleId: string; questions: Question[] };
 
-export default function MasteryQuiz({ initialQuiz }: { initialQuiz: Quiz }) {
-  const questions = initialQuiz.questions;
+export default function MasteryQuiz({ quiz }: { quiz: Quiz }) {
+  const questions = quiz.questions;
   const total = questions.length;
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -211,7 +211,7 @@ export default function MasteryQuiz({ initialQuiz }: { initialQuiz: Quiz }) {
               </p>
               <div className="space-y-4">
                 {wrongQuestions.map(q => {
-                  const items = RESOURCES[initialQuiz.moduleId]?.[q.id] ?? [];
+                  const items = RESOURCES[quiz.moduleId]?.[q.id] ?? [];
                   if (!items.length) return null;
                   return (
                     <div

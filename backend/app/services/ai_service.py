@@ -76,10 +76,27 @@ class CreateAIService:
         }
 
         try:
+            # Log request details for debugging
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.info(f"CreateAI Request URL: {self.api_url}")
+            logger.info(f"CreateAI Request Payload keys: {list(payload.keys())}")
+            query_text = payload.get('query', '')
+            logger.info(f"CreateAI Query length: {len(query_text)} characters")
+            logger.info(f"CreateAI Query preview: {query_text[:200]}...")
+            logger.info(f"CreateAI Timeout: {self.timeout}s")
+            
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 response = await client.post(self.api_url, json=payload, headers=headers)
+        except httpx.TimeoutException as exc:
+            raise CreateAIServiceError(f"CreateAI request timed out after {self.timeout}s: {exc}") from exc
+        except httpx.ConnectError as exc:
+            raise CreateAIServiceError(f"CreateAI connection failed. Check API URL and network: {exc}") from exc
         except httpx.RequestError as exc:
-            raise CreateAIServiceError(f"CreateAI request failed: {exc}") from exc
+            error_msg = str(exc)
+            if hasattr(exc, 'request'):
+                error_msg += f" (URL: {exc.request.url if hasattr(exc.request, 'url') else 'unknown'})"
+            raise CreateAIServiceError(f"CreateAI request failed: {error_msg}") from exc
 
         if response.status_code >= 400:
             detail = response.text
