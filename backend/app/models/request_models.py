@@ -34,3 +34,8 @@ class CreateAIQueryRequest(BaseModel):
     search_params: dict | None = None
     extra_input: dict | None = None
     extra_model_params: dict | None = None
+
+
+class QuizGenerationRequest(BaseModel):
+    module_id: str
+    num_questions: int = Field(ge=1, le=20, default=10)

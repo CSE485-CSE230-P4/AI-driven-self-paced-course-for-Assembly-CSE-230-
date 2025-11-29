@@ -1,0 +1,19 @@
+{
+  "name": "ai-driven-self-paced-course-for-assembly-cse-230-",
+  "version": "1.0.0",
+  "description": "Monorepo with Next.js frontend, FastAPI backend, and PostgreSQL (pgvector). Docker Compose runs everything with one command.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaus0311/AI-driven-self-paced-course-for-Assembly-CSE-230-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaus0311/AI-driven-self-paced-course-for-Assembly-CSE-230-/issues"
+  },
+  "homepage": "https://github.com/kaus0311/AI-driven-self-paced-course-for-Assembly-CSE-230-#readme"
+}

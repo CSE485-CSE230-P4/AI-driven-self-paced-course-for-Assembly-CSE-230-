@@ -18,6 +18,7 @@ db_data
 
 # virtual environment
 .venv
+pjenv/
 
 # local documentation
 APIDocumentation.pdf
