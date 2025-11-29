@@ -1,6 +1,12 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+// frontend/app/login/components/ui/utils.ts
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+// A simple type for things we can pass to `cn`
+export type ClassValue = string | number | null | undefined | false;
+
+/**
+ * Join class names together, skipping falsy values.
+ * Example: cn("a", condition && "b") -> "a b"
+ */
+export function cn(...inputs: ClassValue[]): string {
+  return inputs.filter(Boolean).join(" ");
 }
