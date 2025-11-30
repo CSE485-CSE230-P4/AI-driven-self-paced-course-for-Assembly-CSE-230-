@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ModuleContent from "./ModuleContent";
+import ModuleTabs from "./ModuleTabs";
 
 // Module data structure
 const moduleData: Record<string, {
@@ -274,17 +274,6 @@ export default async function ModuleDetailPage(
               </svg>
               <span>AI Tutor</span>
             </Link>
-            <Link href="#" className="text-white flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              <span>Analytics</span>
-            </Link>
-            <Link href="#" className="text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </Link>
           </div>
         </div>
       </header>
@@ -292,7 +281,7 @@ export default async function ModuleDetailPage(
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-6 py-8">
         {/* Back to Modules */}
-        <Link href="/login/student" className="inline-flex items-center gap-2 text-gray-600 hover:text-black mb-6 transition-colors">
+        <Link href="/dashboard" className="inline-flex items-center gap-2 text-gray-600 hover:text-black mb-6 transition-colors">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
@@ -321,7 +310,7 @@ export default async function ModuleDetailPage(
           <span className="text-black font-semibold">{module.progress}</span>
         </div>
 
-        <ModuleContent moduleId={id} module={module} />
+        <ModuleTabs moduleId={id} module={module} />
       </main>
     </div>
   );

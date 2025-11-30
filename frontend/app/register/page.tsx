@@ -1,10 +1,15 @@
-import type { Metadata } from "next";
-import { RegisterPage } from "../login/components/RegisterPage";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Create account | CSE 230",
-};
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Register() {
-  return <RegisterPage />;
+  const router = useRouter();
+  
+  useEffect(() => {
+    // Redirect to login page which now handles registration
+    router.push("/login");
+  }, [router]);
+  
+  return null;
 }

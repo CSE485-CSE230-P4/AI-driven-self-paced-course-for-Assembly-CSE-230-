@@ -1,10 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import CodingSandbox from "./sandbox";
 
-type ModuleContentProps = {
+type ModuleTabsProps = {
   moduleId: string;
   module: {
     title: string;
@@ -16,43 +12,30 @@ type ModuleContentProps = {
   };
 };
 
-export default function ModuleContent({ moduleId, module }: ModuleContentProps) {
-  const [activeTab, setActiveTab] = useState<"content" | "sandbox">("content");
-
+export default function ModuleTabs({ moduleId, module }: ModuleTabsProps) {
   return (
     <>
       {/* Navigation Tabs */}
       <div className="flex gap-1 border-b border-gray-300 mb-6">
-        <button
-          onClick={() => setActiveTab("content")}
-          className={`px-6 py-3 font-semibold transition-colors ${
-            activeTab === "content"
-              ? "text-black border-b-2 border-black"
-              : "text-gray-600 hover:text-black"
-          }`}
-        >
+        <div className="px-6 py-3 font-semibold text-black border-b-2 border-black">
           Learning Content
-        </button>
+        </div>
         <Link
           href={`/module/${moduleId}/mastery`}
           className="px-6 py-3 text-gray-600 hover:text-black transition-colors"
         >
           Practice & Mastery
         </Link>
-        <button
-          onClick={() => setActiveTab("sandbox")}
-          className={`px-6 py-3 transition-colors ${
-            activeTab === "sandbox"
-              ? "font-semibold text-black border-b-2 border-black"
-              : "text-gray-600 hover:text-black"
-          }`}
+        <Link
+          href={`/module/${moduleId}/sandbox`}
+          className="px-6 py-3 text-gray-600 hover:text-black transition-colors"
         >
           Coding Sandbox
-        </button>
+        </Link>
       </div>
 
       {/* Content Sections */}
-      {activeTab === "content" ? (
+      <div>
         <div className="space-y-6">
           {/* Readings Section */}
           <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
@@ -116,9 +99,7 @@ export default function ModuleContent({ moduleId, module }: ModuleContentProps) 
             </div>
           </div>
         </div>
-      ) : (
-        <CodingSandbox />
-      )}
+      </div>
     </>
   );
 }

@@ -131,11 +131,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           return { success: false, error: "Login response did not contain an access token." };
         }
 
+        // Try to get existing user data from localStorage to preserve role
+        const existingUser = readStoredUser();
+        const preservedRole = existingUser?.email === email ? existingUser.role : undefined;
+
         const authUser: AuthUser = {
           id: metadata?.id ?? email,
           email,
-          name: metadata?.name,
-          role: metadata?.role,
+          name: metadata?.name ?? existingUser?.name,
+          role: metadata?.role ?? preservedRole ?? 'student',
         };
 
         setToken(data.access_token);

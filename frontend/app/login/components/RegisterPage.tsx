@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -13,9 +13,21 @@ import { AlertCircle, User, GraduationCap } from 'lucide-react';
 
 export function RegisterPage() {
   const router = useRouter();
-  const { register } = useAuth();
+  const { register, user, isAuthenticated } = useAuth();
   
   const [userType, setUserType] = useState<'student' | 'professor' | null>(null);
+  const [registeredRole, setRegisteredRole] = useState<string | null>(null);
+
+  // Redirect after successful registration based on role
+  useEffect(() => {
+    if (isAuthenticated && user && registeredRole) {
+      if (registeredRole === 'professor') {
+        router.push('/login/teacher');
+      } else {
+        router.push('/login/student');
+      }
+    }
+  }, [user, isAuthenticated, registeredRole, router]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -83,10 +95,12 @@ export function RegisterPage() {
     setIsLoading(true);
 
     // Attempt to register
-    const result = await register(formData.name, formData.email, formData.password, userType || 'student');
+    const role = userType === 'professor' ? 'professor' : 'student';
+    const result = await register(formData.name, formData.email, formData.password, role);
 
     if (result.success) {
-      router.push('/dashboard');
+      setRegisteredRole(role);
+      // Redirect is handled by useEffect watching user state
     } else {
       // Show error
       setErrors({ general: result.error || 'Registration failed.' });
@@ -107,13 +121,29 @@ export function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted px-4 py-8">
-      <div className="w-full max-w-md space-y-4">
-        <div className="text-center space-y-1">
-          <h1 className="text-primary">Arizona State University</h1>
-          <p className="text-muted-foreground">CSE 230: Computer Org/Assemb Lang Prog</p>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-[#800020] px-6 py-4 shadow-md">
+        <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex items-center gap-3">
+            <div className="bg-yellow-400 h-10 w-10 rounded flex items-center justify-center">
+              <span className="text-[#800020] font-bold text-lg">CSE</span>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-white">CSE 230 Computer Systems</h1>
+            </div>
+          </div>
         </div>
-        <Card className="border-2 shadow-xl">
+      </header>
+
+      {/* Main Content */}
+      <main className="flex items-center justify-center min-h-[calc(100vh-80px)] px-4 py-8">
+        <div className="w-full max-w-md space-y-4">
+          <div className="text-center space-y-1">
+            <h1 className="text-3xl font-bold text-gray-900">Arizona State University</h1>
+            <p className="text-gray-600">CSE 230: Computer Org/Assemb Lang Prog</p>
+          </div>
+          <Card className="border-2 shadow-xl">
           <CardHeader className="space-y-1">
             <CardTitle>Create an account</CardTitle>
             <CardDescription>
@@ -257,13 +287,13 @@ export function RegisterPage() {
                     )}
                   </div>
 
-                  <Button type="submit" className="w-full" disabled={isLoading}>
+                  <Button type="submit" className="w-full bg-[#800020] hover:bg-[#91173b] text-white" disabled={isLoading}>
                     {isLoading ? 'Creating account...' : 'Sign Up'}
                   </Button>
 
-                  <div className="text-center text-sm text-muted-foreground">
+                  <div className="text-center text-sm text-gray-600">
                     Already have an account?{' '}
-                    <Link href="/login" className="text-secondary hover:underline">
+                    <Link href="/login" className="text-[#800020] hover:underline font-medium">
                       Sign in
                     </Link>
                   </div>
@@ -272,7 +302,8 @@ export function RegisterPage() {
             </form>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

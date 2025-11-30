@@ -1,15 +1,30 @@
-import type { Metadata } from "next";
-import { Dashboard } from "../login/components/Dashboard";
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from "../login/hooks/useAuth";
 import { ProtectedRoute } from "../login/components/ProtectedRoute";
 
-export const metadata: Metadata = {
-  title: "Dashboard | CSE 230",
-};
-
 export default function DashboardPage() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      // Redirect based on user role
+      if (user.role === 'professor' || user.role === 'teacher') {
+        router.replace('/login/teacher');
+      } else {
+        router.replace('/login/student');
+      }
+    }
+  }, [user, router]);
+
   return (
     <ProtectedRoute>
-      <Dashboard />
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-600">Redirecting...</p>
+      </div>
     </ProtectedRoute>
   );
 }
