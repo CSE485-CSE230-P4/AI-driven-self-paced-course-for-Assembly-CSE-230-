@@ -3,19 +3,16 @@
 
 import { useState } from "react";
 
-// Types + data from the Figma project (now under teacher-dashboard/)
-import {
-  TeacherDashboard as TeacherDashboardData,
-  QuestionAnalytics as QuestionAnalyticsType,
-} from "./teacher-dashboard/types/teacher";
-import { Question } from "./teacher-dashboard/types/quiz";
-import { getTeacherDashboardData } from "./teacher-dashboard/data/teacherMockData";
+// Types from our types directory
+import { ModuleAnalytics, QuestionAnalytics as QuestionAnalyticsType } from "../types/teacher";
+import { Question } from "../types/quiz";
+import { TeacherDashboardData, getTeacherDashboardData } from "../data/teacherMockData";
 
-// UI components from the Figma project
-import { TeacherModuleSelector } from "./teacher-dashboard/TeacherModuleSelector";
-import { QuestionAnalytics } from "./teacher-dashboard/QuestionAnalytics";
-import { MasteryTestView } from "./teacher-dashboard/MasteryTestView";
-import { Toaster } from "./teacher-dashboard/ui/sonner";
+// UI components
+import { TeacherModuleSelector } from "./TeacherModuleSelector";
+import { QuestionAnalytics } from "./QuestionAnalytics";
+import { MasteryTestView } from "./MasteryTestView";
+import { Toaster } from "./ui/sonner";
 
 type AppState = "module-overview" | "question-analytics" | "mastery-test";
 
@@ -54,7 +51,7 @@ export function TeacherDashboard() {
       options: ["Option A", "Option B", "Option C", "Option D"],
       correctAnswer: 0,
       topic: q.topic,
-      subTopic: q.subTopic,
+      subTopic: q.subTopic || "",
       module: moduleName,
     }));
 

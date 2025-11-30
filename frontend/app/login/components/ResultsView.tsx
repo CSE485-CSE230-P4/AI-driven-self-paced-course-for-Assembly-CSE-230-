@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { QuizAttempt } from '../types/quiz';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../Teachconents/ui/card';
-import { Button } from '../Teachconents/ui/button';
-import { Progress } from '../Teachconents/ui/progress';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Progress } from './ui/progress';
 import { QuizCard } from './QuizCard';
 import { CheckCircle, XCircle, RotateCcw, Trophy, AlertCircle } from 'lucide-react';
-import { Badge } from '../Teachconents/ui/badge';
+import { Badge } from './ui/badge';
 
 interface ResultsViewProps {
   attempt: QuizAttempt;
@@ -29,7 +29,7 @@ export function ResultsView({ attempt, onRetake, onBackToModules }: ResultsViewP
   );
 
   const topicPerformance = attempt.questions.reduce((acc, q, idx) => {
-    const key = `${q.topic} - ${q.subTopic}`;
+    const key = `${q.topic}${q.subTopic ? ` - ${q.subTopic}` : ''}`;
     if (!acc[key]) {
       acc[key] = { correct: 0, total: 0 };
     }

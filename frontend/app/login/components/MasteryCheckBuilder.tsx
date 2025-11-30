@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { ModuleAnalytics, QuestionAnalytics } from '../types/teacher';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../Teachconents/ui/card';
-import { Label } from '../Teachconents/ui/label';
-import { Input } from '../Teachconents/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../Teachconents/ui/select';
-import { Badge } from '../Teachconents/ui/badge';
-import { Button } from '../Teachconents/ui/button';
-import { Checkbox } from '../Teachconents/ui/checkbox';
-import { toast } from 'sonner@2.0.3';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Label } from './ui/label';
+import { Input } from './ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { Checkbox } from './ui/checkbox';
+import { toast } from 'sonner';
 
 interface MasteryCheckBuilderProps {
   modules: ModuleAnalytics[];

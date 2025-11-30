@@ -1,10 +1,10 @@
 //PROF VIEW COMPONENT
 
 import { Question } from '../types/quiz';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../Teachconents/ui/card';
-import { Button } from '../Teachconents/ui/button';
-import { RadioGroup, RadioGroupItem } from '../Teachconents/ui/radio-group';
-import { Label } from '../Teachconents/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
+import { Label } from './ui/label';
 
 interface QuizCardProps {
   question: Question;
@@ -27,7 +27,7 @@ export function QuizCard({
     <Card className="w-full shadow-sm">
       <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b">
         <CardDescription className="text-gray-600">
-          Question {questionNumber} of {totalQuestions} • {question.topic} - {question.subTopic}
+          Question {questionNumber} of {totalQuestions} • {question.topic}{question.subTopic ? ` - ${question.subTopic}` : ''}
         </CardDescription>
         <CardTitle className="text-red-900">{question.question}</CardTitle>
       </CardHeader>

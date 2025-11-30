@@ -1,10 +1,10 @@
 //PROF VIEW COMPONENT
 
 import { ModuleAnalytics } from '../types/teacher';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../Teachconents/ui/card';
-import { Button } from '../Teachconents/ui/button';
-import { Badge } from '../Teachconents/ui/badge';
-import { Progress } from '../Teachconents/ui/progress';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
 import { MasteryCheckBuilder } from './MasteryCheckBuilder';
 
 interface TeacherModuleSelectorProps {

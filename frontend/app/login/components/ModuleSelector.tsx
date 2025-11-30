@@ -1,12 +1,12 @@
 //PROF VIEW COMPONENT
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../Teachconents/ui/card';
-import { Button } from '../Teachconents/ui/button';
-import { Badge } from '../Teachconents/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 import { BookOpen, CheckCircle, Clock, PlayCircle, Award, TrendingUp, Target } from 'lucide-react';
 import { QuizAttempt } from '../types/quiz';
 import { moduleDescriptions } from '../data/questionBank';
-import { Progress } from '../Teachconents/ui/progress';
+import { Progress } from './ui/progress';
 
 interface ModuleSelectorProps {
   modules: string[];

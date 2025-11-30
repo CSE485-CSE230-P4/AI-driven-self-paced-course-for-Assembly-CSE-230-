@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { Question } from '../types/quiz';
 import { QuizCard } from './QuizCard';
-import { Button } from '../Teachconents/ui/button';
-import { Progress } from '../Teachconents/ui/progress';
-import { Card, CardContent, CardHeader, CardTitle } from '../Teachconents/ui/card';
+import { Button } from './ui/button';
+import { Progress } from './ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { ChevronLeft, ChevronRight, Send, ArrowLeft, CheckCircle2 } from 'lucide-react';
-import { Badge } from '../Teachconents/ui/badge';
+import { Badge } from './ui/badge';
 
 interface MasteryTestViewProps {
   questions: Question[];

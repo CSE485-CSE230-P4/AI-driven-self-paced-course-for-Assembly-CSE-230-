@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { QuizAttempt } from '../types/quiz';
 import { QuizCard } from './QuizCard';
-import { Button } from '../Teachconents/ui/button';
-import { Progress } from '../Teachconents/ui/progress';
-import { Card, CardContent } from '../Teachconents/ui/card';
+import { Button } from './ui/button';
+import { Progress } from './ui/progress';
+import { Card, CardContent } from './ui/card';
 import { ChevronLeft, ChevronRight, Send } from 'lucide-react';
 
 interface QuizViewProps {
